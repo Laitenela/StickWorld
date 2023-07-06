@@ -1,8 +1,8 @@
 import React from "react";
-import Stickman from "./components/Stickman";
+import StickmanBlock from "./components/StickmanBlock";
 
 export default function App() {
   return (
-    <Stickman/>
+    <StickmanBlock/>
   )
 }
