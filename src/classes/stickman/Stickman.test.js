@@ -1,7 +1,7 @@
 import Stickman from "./Stickman.js";
 
 test("stickman has x, y, width, height", () => {
-  const stickman = new Stickman(50, 100, 0, 0);
+  const stickman = new Stickman(50, 100, 0, 0, {});
   expect(stickman.size.x).toBe(50);
   expect(stickman.size.y).toBe(100);
   expect(stickman.position.x).toBe(0);
@@ -9,7 +9,7 @@ test("stickman has x, y, width, height", () => {
 });
 
 test("stickman call callback on change pos, scale", () => {
-  const stickman = new Stickman(50, 100, 0, 0);
+  const stickman = new Stickman(50, 100, 0, 0, {});
   const sizeLogger = jest.fn();
   const positionLogger = jest.fn();
   stickman.size.setEventListener((x, y) => {
@@ -26,14 +26,14 @@ test("stickman call callback on change pos, scale", () => {
 
 test("stickman x0 y0 to x0+x100 y0+y100 1s linear", async () => {
   const startTime = Date.now();
-  const stickman = new Stickman(50, 100, 0, 0);
+  const stickman = new Stickman(50, 100, 0, 0, {});
   const stack = [];
   const logger = (x, y) => {
     stack.push([x, y]);
   };
   stickman.position.setEventListener(logger);
 
-  await stickman.move.linear(100, 100, 1);
+  await stickman.move(100, 100, 1).linear();
   const endTime = Date.now();
   expect(endTime - startTime).toBeGreaterThanOrEqual(900);
   expect(endTime - startTime).toBeLessThanOrEqual(1100);
@@ -60,14 +60,14 @@ test("stickman x0 y0 to x0+x100 y0+y100 1s linear", async () => {
 
 test("stickman x0 y0 to x100 y100 1s linear", async () => {
   const startTime = Date.now();
-  const stickman = new Stickman(50, 100, 0, 0);
+  const stickman = new Stickman(50, 100, 0, 0, {actionsList: 0});
   const stack = [];
   const logger = (x, y) => {
     stack.push([x, y]);
   };
   stickman.position.setEventListener(logger);
 
-  await stickman.moveTo.linear(100, 100, 1);
+  await stickman.moveTo(100, 100, 1).linear();
   const endTime = Date.now();
   expect(endTime - startTime).toBeGreaterThanOrEqual(900);
   expect(endTime - startTime).toBeLessThanOrEqual(1100);
