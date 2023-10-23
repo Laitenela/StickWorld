@@ -3,7 +3,7 @@
 import stickmanActions from "./actions";
 import PositionsController from "./positionsController";
 
-const sleep = (ms) =>
+const sleep = (/** @type {number} */ ms) =>
   new Promise((resolve) => {
     setTimeout(resolve, ms);
   });
@@ -30,10 +30,9 @@ export default class Stickman {
   /** Stickman constructior
    * @param {number} sizeX 
    * @param {number} sizeY 
-   * @param {number} positionX 
-   * @param {number} positionY 
-   * @param {*} world 
-   */
+   * @param {number} positionX
+   * @param {number} positionY
+   * @param {*} world */
   constructor(sizeX, sizeY, positionX, positionY, world) {
     this.size = new PositionsController(sizeX, sizeY);
     this.position = new PositionsController(positionX, positionY);
@@ -71,13 +70,8 @@ export default class Stickman {
     };
   }
 
-  /**
-   * Move to current position
-   * @param {number} x
-   * @param {number} y
-   * @param {number} time
-   */
-  moveTo(x, y, time) {
+  /** Move to current position */
+  moveTo(/** @type {number} */ x, /** @type {number} */ y, /** @type {number} */ time) {
     const newPosX = x - this.position.x;
     const newPosY = y - this.position.y;
     return {
